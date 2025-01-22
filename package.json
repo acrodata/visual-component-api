@@ -8,5 +8,12 @@
   "author": "nzbin<nzb329@163.com>",
   "license": "ISC",
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
+    "typescript": "~5.5.2"
+  }
 }
