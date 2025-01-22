@@ -1,0 +1,12 @@
+{
+  "name": "@acrodata/plugin-tools",
+  "version": "0.0.0",
+  "description": "Plugin tools for acrodata visual components.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "nzbin<nzb329@163.com>",
+  "license": "ISC",
+  "scripts": {},
+  "dependencies": {}
+}
