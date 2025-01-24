@@ -1,13 +1,15 @@
 {
-  "name": "@acrodata/plugin-tools",
+  "name": "@acrodata/visual-component-api",
   "version": "0.0.0",
-  "description": "Plugin tools for acrodata visual components.",
+  "description": "Acrodata visual component type definitions.",
   "publishConfig": {
     "access": "public"
   },
   "author": "nzbin<nzb329@163.com>",
-  "license": "ISC",
-  "scripts": {},
+  "license": "MIT",
+  "scripts": {
+    "build": "npx tsc -p tsconfig.json"
+  },
   "dependencies": {
     "lodash-es": "^4.17.21",
     "tslib": "^2.3.0"
