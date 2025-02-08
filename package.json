@@ -1,7 +1,7 @@
 {
   "name": "@acrodata/visual-component-api",
-  "version": "0.1.0",
-  "description": "Visual component type definitions.",
+  "version": "0.2.0",
+  "description": "Visual component type definitions",
   "publishConfig": {
     "access": "public"
   },
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "npx tsc -p tsconfig.json",
     "clean": "rimraf dist",
-    "publish": "npm run clean && npm run build && cd dist && npm publish"
+    "publish": "npm run clean && npm run build && npm publish"
   },
   "dependencies": {
     "@acrodata/gui": "^2.1.3",
