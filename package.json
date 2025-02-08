@@ -27,6 +27,7 @@
   "devDependencies": {
     "@angular/core": "^18.2.0",
     "@types/lodash-es": "^4.17.6",
+    "prettier": "^3.4.2",
     "rimraf": "^5.0.0",
     "typescript": "~5.5.2"
   }
