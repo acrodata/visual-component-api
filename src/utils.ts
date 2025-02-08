@@ -1,15 +1,12 @@
 import { isString, isObject, merge } from 'lodash-es';
-import { VisualComponentDataSource } from './interfaces';
+import { VisualDataSource } from './interfaces';
 
 /**
  * 合并数据源配置项
  * @param dataSource 组件数据源配置
  * @param config     组件接收到的数据源配置
  */
-export function mergeDataSource(
-  dataSource?: VisualComponentDataSource,
-  config?: VisualComponentDataSource
-) {
+export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDataSource) {
   if (dataSource) {
     try {
       if (isString(dataSource.apiHeaders)) {

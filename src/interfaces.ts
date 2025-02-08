@@ -1,4 +1,4 @@
-export interface VisualComponentAttr {
+export interface VisualAttr {
   left?: number;
   top?: number;
   width?: number;
@@ -10,26 +10,26 @@ export interface VisualComponentAttr {
   translate?: number[];
 }
 
-export interface VisualComponentEvent {
+export interface VisualEvent {
   description: string;
   fields?: {
     description: string;
   };
 }
 
-export interface VisualComponentEvents {
-  [k: string]: VisualComponentEvent;
+export interface VisualEvents {
+  [k: string]: VisualEvent;
 }
 
-export interface VisualComponentAction {
+export interface VisualAction {
   description: string;
 }
 
-export interface VisualComponentActions {
-  [k: string]: VisualComponentAction;
+export interface VisualActions {
+  [k: string]: VisualAction;
 }
 
-export interface VisualComponentApiField {
+export interface VisualApiField {
   /** 字段描述 */
   description: string;
   /** 字段类型 */
@@ -40,24 +40,24 @@ export interface VisualComponentApiField {
   mapping?: string;
 }
 
-export interface VisualComponentApiFields {
-  [k: string]: VisualComponentApiField;
+export interface VisualApiFields {
+  [k: string]: VisualApiField;
 }
 
-export interface VisualComponentApi {
+export interface VisualApi {
   /** 接口描述 */
   description: string;
   /** 请求函数 */
   handler: string;
   /** 字段列表 */
-  fields?: VisualComponentApiFields;
+  fields?: VisualApiFields;
 };
 
-export interface VisualComponentApis {
-  [k: string]: VisualComponentApi;
+export interface VisualApis {
+  [k: string]: VisualApi;
 }
 
-export interface VisualComponentDataConfig {
+export interface VisualDataConfig {
   /** 从对象转数组之后带过来的 key，作用同 id */
   key: string;
   /** 标题 */
@@ -65,7 +65,7 @@ export interface VisualComponentDataConfig {
   /** 同标题 */
   description: string;
   /** API 字段列表 */
-  fields?: VisualComponentApiFields;
+  fields?: VisualApiFields;
   /** API 字段映射 */
   fieldsMapping?: Record<string, string>;
   /** 受控模式 */
@@ -75,14 +75,14 @@ export interface VisualComponentDataConfig {
   /** 定时间隔 */
   timeInterval: number;
   /** 数据源配置信息 */
-  dataSource: VisualComponentDataSource;
+  dataSource: VisualDataSource;
 }
 
-export interface VisualComponentDataConfigs {
-  [k: string]: VisualComponentDataConfig;
+export interface VisualDataConfigs {
+  [k: string]: VisualDataConfig;
 }
 
-export type VisualComponentDataSourceType =
+export type VisualDataSourceType =
   | 'mock'
   | 'static'
   | 'api'
@@ -92,7 +92,7 @@ export type VisualComponentDataSourceType =
   | 'prometheus'
   | 'apacheDruid';
 
-export interface VisualComponentDataFilter {
+export interface VisualDataFilter {
   /** 全局过滤器的 id */
   id?: number;
   /** 是否启用 */
@@ -105,10 +105,10 @@ export interface VisualComponentDataFilter {
   code?: string;
 }
 
-export interface VisualComponentDataSource {
-  type?: VisualComponentDataSourceType;
+export interface VisualDataSource {
+  type?: VisualDataSourceType;
   useFilter?: boolean; // 是否使用过滤器
-  filters?: VisualComponentDataFilter[];
+  filters?: VisualDataFilter[];
   api?: string; // API 地址
   apiHeaders?: string; // 请求头
   apiBody?: any; // POST 请求体

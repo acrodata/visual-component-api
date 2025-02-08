@@ -2,12 +2,12 @@ import { GuiFields } from '@acrodata/gui';
 import { ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { isEmpty, merge } from 'lodash-es';
 import {
-  VisualComponentActions,
-  VisualComponentApis,
-  VisualComponentAttr,
-  VisualComponentDataConfig,
-  VisualComponentDataSource,
-  VisualComponentEvents,
+  VisualActions,
+  VisualApis,
+  VisualAttr,
+  VisualDataConfig,
+  VisualDataSource,
+  VisualEvents,
 } from './interfaces';
 import { mergeDataSource } from './utils';
 
@@ -56,7 +56,7 @@ export class VisualComponent {
   version = '';
 
   /** 基础属性 */
-  attr: VisualComponentAttr = {};
+  attr: VisualAttr = {};
 
   /** 配置项的 GUI 定义 */
   config: GuiFields = {};
@@ -65,10 +65,10 @@ export class VisualComponent {
   options: Record<string, any> = {};
 
   /** 事件 */
-  events: VisualComponentEvents = {};
+  events: VisualEvents = {};
 
   /** 动作 */
-  actions: VisualComponentActions = {
+  actions: VisualActions = {
     updateAttr: {
       description: '更新组件属性',
     },
@@ -87,13 +87,13 @@ export class VisualComponent {
   };
 
   /** API 字段配置 */
-  apis: VisualComponentApis = {};
+  apis: VisualApis = {};
 
   /** 静态数据 */
   data: Record<string, any[]> = {};
 
   /** 数据源配置 */
-  dataConfig: Record<string, VisualComponentDataConfig> = {};
+  dataConfig: Record<string, VisualDataConfig> = {};
 
   /** 请求响应数据 */
   responseData: Record<string, any[]> = {};
@@ -110,19 +110,19 @@ export class VisualComponent {
   /** 显示 */
   show() {
     this.isHide = false;
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /** 隐藏 */
   hide() {
     this.isHide = true;
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /** 切换显隐状态 */
   toggleHide() {
     this.isHide = !this.isHide;
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /** 组件初始化钩子函数 */
@@ -137,7 +137,7 @@ export class VisualComponent {
    * @param options
    */
   render(data: any, options?: Record<string, any>) {
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /**
@@ -145,16 +145,16 @@ export class VisualComponent {
    * @param newOptions
    */
   updateOptions(newOptions: Record<string, any>) {
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /**
    * 更新组件的基础属性
    * @param newAttr
    */
-  updateAttr(newAttr: VisualComponentAttr) {
+  updateAttr(newAttr: VisualAttr) {
     merge(this.attr, newAttr);
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /**
@@ -163,14 +163,14 @@ export class VisualComponent {
    * @param height
    */
   resize(width: number, height: number) {
-    this._cdr && this._cdr.detectChanges();
+    this._cdr?.detectChanges();
   }
 
   /**
    * 请求数据接口
    * @param dataSource 数据源配置
    */
-  request!: (dataSource?: VisualComponentDataSource) => Promise<void>;
+  request!: (dataSource?: VisualDataSource) => Promise<void>;
 
   /** 当数据接口请求成功时 */
   requestSucceeded = new EventEmitter<any>();
@@ -181,7 +181,8 @@ export class VisualComponent {
   /**
    * 请求数据
    * @param data
-   * @description  config 数据源配置; options 组件配置项
+   * @description config  数据源配置
+   * @description options 组件配置项
    */
   requestData(data: { config?: any; options?: any }) {
     mergeDataSource(this.dataConfig?.['source']?.dataSource, data.config || {});
