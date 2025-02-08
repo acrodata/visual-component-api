@@ -5,8 +5,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "types": "index",
-  "main": "index.js",
+  "types": "dist/index",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "viz",
     "visual",
