@@ -1,6 +1,6 @@
 import { GuiFields } from '@acrodata/gui';
 import { ChangeDetectorRef, EventEmitter } from '@angular/core';
-import { assign, isEmpty, merge } from 'lodash-es';
+import { isEmpty, merge } from 'lodash-es';
 import {
   VisualComponentActions,
   VisualComponentApis,
@@ -14,42 +14,36 @@ import { mergeDataSource } from './utils';
 export class VisualComponent {
   constructor(configs?: Record<string, any>, cdr?: ChangeDetectorRef) {
     if (configs) {
-      configs['version'] && (this.version = configs['version']);
-      !isEmpty(configs['attr']) && (this.attr = assign(configs['attr'], this.attr));
-      !isEmpty(configs['config']) && (this.config = assign(configs['config'], this.config));
-      !isEmpty(configs['options']) && (this.options = assign(configs['options'], this.options));
-      !isEmpty(configs['apis']) && (this.apis = assign(configs['apis'], this.apis));
-      !isEmpty(configs['data']) && (this.data = assign(configs['data'], this.data));
+      this.attr = { ...configs['attr'] };
+      this.config = { ...configs['config'] };
+      this.options = { ...configs['options'] };
+      this.apis = { ...configs['apis'] };
+      this.data = { ...configs['data'] };
 
-      if (!isEmpty(configs['apis'])) {
-        this.events = assign(
-          {
-            requestSucceeded: {
-              description: '当数据接口请求成功时',
-            },
-            requestFailed: {
-              description: '当数据接口请求失败时',
-            },
-          },
-          configs['events'],
-          this.events
-        );
-
-        this.actions = assign(
-          {
-            requestData: {
-              description: '请求数据',
-            },
-            render: {
-              description: '导入数据',
-            },
-          },
-          configs['actions'],
-          this.actions
-        );
+      if (isEmpty(configs['apis'])) {
+        this.events = { ...configs['events'] };
+        this.actions = { ...configs['actions'], ...this.actions };
       } else {
-        !isEmpty(configs['events']) && (this.events = assign(configs['events'], this.events));
-        !isEmpty(configs['actions']) && (this.actions = assign(configs['actions'], this.actions));
+        this.events = {
+          requestSucceeded: {
+            description: '当数据接口请求成功时',
+          },
+          requestFailed: {
+            description: '当数据接口请求失败时',
+          },
+          ...configs['events'],
+        };
+
+        this.actions = {
+          requestData: {
+            description: '请求数据',
+          },
+          render: {
+            description: '导入数据',
+          },
+          ...configs['actions'],
+          ...this.actions,
+        };
       }
     }
 
@@ -58,11 +52,8 @@ export class VisualComponent {
 
   private _cdr?: ChangeDetectorRef;
 
-  /** 组件当前数据 */
-  private _data: any;
-
   /** 版本号 */
-  version = "0.0.0"
+  version = '';
 
   /** 基础属性 */
   attr: VisualComponentAttr = {};
@@ -135,10 +126,10 @@ export class VisualComponent {
   }
 
   /** 组件初始化钩子函数 */
-  init(options?: Record<string, any>) { }
+  init(options?: Record<string, any>) {}
 
   /** 组件销毁钩子函数 */
-  destroy() { }
+  destroy() {}
 
   /**
    * 渲染数据
@@ -198,28 +189,5 @@ export class VisualComponent {
     this.request(this.dataConfig['source'].dataSource)
       .then(res => this.requestSucceeded.emit(res))
       .catch(err => this.requestFailed.emit(err));
-  }
-
-  // TODO: 多数据源支持
-  /**
-   * 设置当前数据
-   * @param data 传入的数据
-   */
-  setData(data: any[]) {
-    if (data && this._data !== data) {
-      this._data = data;
-    }
-    return this._data;
-  }
-
-  /**
-   * 设置当前配置
-   * @param options 传入的配置
-   */
-  setOptions(options: Record<string, any>) {
-    if (options && this.options !== options) {
-      merge(this.options, options);
-    }
-    return this.options;
   }
 }

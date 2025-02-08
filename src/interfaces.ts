@@ -8,7 +8,6 @@ export interface VisualComponentAttr {
   flipH?: boolean;
   flipV?: boolean;
   translate?: number[];
-  disableEvents?: boolean;
 }
 
 export interface VisualComponentEvent {
