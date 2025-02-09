@@ -8,6 +8,7 @@ import {
   VisualDataConfig,
   VisualDataSource,
   VisualEvents,
+  VisualInteractions,
 } from './interfaces';
 import { mergeDataSource } from './utils';
 
@@ -52,11 +53,14 @@ export class VisualComponent {
 
   private _cdr?: ChangeDetectorRef;
 
+  /** 组件 ID */
+  id = '';
+
   /** 版本号 */
   version = '';
 
   /** 基础属性 */
-  attr: VisualAttr = {};
+  attr: VisualAttr = { left: 0, top: 0 };
 
   /** 配置项的 GUI 定义 */
   config: GuiFields = {};
@@ -86,6 +90,9 @@ export class VisualComponent {
     },
   };
 
+  /** 交互配置 */
+  interactions: VisualInteractions = {};
+
   /** API 字段配置 */
   apis: VisualApis = {};
 
@@ -102,10 +109,16 @@ export class VisualComponent {
   resources: Record<string, any> = {};
 
   /** 控制隐藏的变量 */
-  isHide = false;
+  isHide?: boolean;
 
   /** 无数据标记，每个组件根据业务场景独立控制 */
-  noData = false;
+  noData?: boolean;
+
+  /** 父组件 */
+  parent?: VisualComponent;
+
+  /** 子组件 */
+  children?: VisualComponent[];
 
   /** 显示 */
   show() {

@@ -1,6 +1,6 @@
 export interface VisualAttr {
-  left?: number;
-  top?: number;
+  left: number;
+  top: number;
   width?: number;
   height?: number;
   deg?: number;
@@ -29,6 +29,25 @@ export interface VisualActions {
   [k: string]: VisualAction;
 }
 
+export interface VisualInteraction {
+  /** 交互事件 */
+  event: string;
+  /** 交互组件 */
+  component: { id: string; name: string };
+  /** 交互动作 */
+  action: string;
+  /** 数据过滤器 */
+  filters: VisualDataFilter[];
+  /** 条件配置 */
+  conditions?: VisualDataFilter[];
+  /** 条件类型：全部满足或者只满足一个 */
+  conditionType?: 'all' | 'either' | null;
+}
+
+export interface VisualInteractions {
+  [k: string]: VisualInteraction[];
+}
+
 export interface VisualApiField {
   /** 字段描述 */
   description: string;
@@ -51,7 +70,7 @@ export interface VisualApi {
   handler: string;
   /** 字段列表 */
   fields?: VisualApiFields;
-};
+}
 
 export interface VisualApis {
   [k: string]: VisualApi;
