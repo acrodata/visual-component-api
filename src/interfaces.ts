@@ -106,10 +106,19 @@ export type VisualDataSourceType =
   | 'static'
   | 'api'
   | 'csv'
-  | 'database'
-  | 'tingyun'
-  | 'prometheus'
-  | 'apacheDruid';
+  | VisualDatabaseType
+  | VisualDataSourceOtherType;
+
+export type VisualDatabaseType =
+  | 'mysql'
+  | 'oracle'
+  | 'db2'
+  | 'sqlserver'
+  | 'postgresql'
+  | 'dm'
+  | 'clickhouse';
+
+export type VisualDataSourceOtherType = 'prometheus' | 'apacheDruid' | 'tingyun';
 
 export interface VisualDataFilter {
   /** 全局过滤器的 id */
@@ -126,32 +135,49 @@ export interface VisualDataFilter {
 
 export interface VisualDataSource {
   type?: VisualDataSourceType;
-  useFilter?: boolean; // 是否使用过滤器
+  /** 是否使用过滤器 */
+  useFilter?: boolean;
+  /** 过滤器数组 */
   filters?: VisualDataFilter[];
-  api?: string; // API 地址
-  apiHeaders?: string; // 请求头
-  apiBody?: any; // POST 请求体
-  apiMethod?: 'get' | 'post'; // 请求方法
-  apiParams?: any; // GET 请求参数
-  local?: boolean;
-  cookie?: boolean;
-  csv?: number;
-  database?: number;
+  /** Mock 数据模板 */
+  mockTemplate?: string;
+  /** 时间戳 */
+  timePeriod?: number;
+  /** 静态数据源 */
+  staticData?: string;
+  /** API 数据源配置 */
+  api?: {
+    url: string;
+    method: 'get' | 'post' | 'put' | 'delete';
+    headers?: any;
+    body?: any;
+    params?: any;
+    proxy?: boolean;
+    cookie?: boolean;
+  };
+  /** 数据源 ID */
+  csv?: string | number;
+  /** 数据库的数据源 ID */
+  database?: string | number;
+  /** 数据库查询 sql */
   sql?: string;
-  staticData?: string; // 静态数据源
-  tingyun?: number;
-  tyFilter?: string; // 编辑器所需字符串
-  prometheus?: number;
+  /** 数据源 ID */
+  prometheus?: string | number;
+  /** 数据源配置 */
   prometheusConfig?: {
     method: string;
     path: string;
     query: string;
     step: number;
   };
-  apacheDruid?: number;
+  /** 数据源 ID */
+  apacheDruid?: string | number;
+  /** 数据源配置 */
   apacheDruidConfig?: {
     query: string;
   };
-  mockTemplate?: string;
-  timePeriod?: number;
+  /** 数据源 ID */
+  tingyun?: string | number;
+  /** 数据源配置 */
+  tingyunConfig?: string;
 }
