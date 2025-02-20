@@ -1,12 +1,12 @@
 export interface VisualAttr {
-  left: number;
-  top: number;
-  width?: number;
-  height?: number;
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
   deg?: number;
-  opacity?: number;
   flipH?: boolean;
   flipV?: boolean;
+  opacity?: number;
   translate?: number[];
 }
 

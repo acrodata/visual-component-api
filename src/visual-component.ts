@@ -60,7 +60,7 @@ export class VisualComponent {
   version = '';
 
   /** 基础属性 */
-  attr: VisualAttr = { left: 0, top: 0 };
+  attr: VisualAttr = { x: 0, y: 0 };
 
   /** 配置项的 GUI 定义 */
   config: GuiFields = {};
