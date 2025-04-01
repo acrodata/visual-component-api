@@ -1,5 +1,5 @@
 import { GuiFields } from '@acrodata/gui';
-import { ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, inject } from '@angular/core';
 import { isEmpty, merge } from 'lodash-es';
 import {
   VisualActions,
@@ -51,7 +51,7 @@ export class VisualComponent {
     cdr && (this._cdr = cdr);
   }
 
-  private _cdr?: ChangeDetectorRef;
+  _cdr = inject(ChangeDetectorRef);
 
   /** 组件 ID */
   id = '';
