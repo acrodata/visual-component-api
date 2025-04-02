@@ -20,6 +20,7 @@ export class VisualComponent {
       this.options = { ...configs['options'] };
       this.apis = { ...configs['apis'] };
       this.data = { ...configs['data'] };
+      this.resources = { ...configs['resources'] };
 
       if (isEmpty(configs['apis'])) {
         this.events = { ...configs['events'] };
