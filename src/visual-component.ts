@@ -13,7 +13,7 @@ import {
 import { mergeDataSource } from './utils';
 
 export class VisualComponent {
-  constructor(configs?: Record<string, any>, cdr?: ChangeDetectorRef) {
+  constructor(configs?: Record<string, any>) {
     if (configs) {
       this.attr = { ...configs['attr'] };
       this.config = { ...configs['config'] };
@@ -48,11 +48,9 @@ export class VisualComponent {
         };
       }
     }
-
-    cdr && (this._cdr = cdr);
   }
 
-  _cdr = inject(ChangeDetectorRef);
+  changeDetectorRef = inject(ChangeDetectorRef);
 
   /** 组件 ID */
   id = '';
@@ -98,13 +96,13 @@ export class VisualComponent {
   apis: VisualApis = {};
 
   /** 静态数据 */
-  data: Record<string, any[]> = {};
+  data: { [k: string]: any[] | undefined; source?: any[] } = {};
 
   /** 数据源配置 */
   dataConfig: Record<string, VisualDataConfig> = {};
 
   /** 请求响应数据 */
-  responseData: Record<string, any[]> = {};
+  responseData: { [k: string]: any[] | undefined; source?: any[] } = {};
 
   /** 资源路径 */
   resources: Record<string, any> = {};
@@ -124,19 +122,19 @@ export class VisualComponent {
   /** 显示 */
   show() {
     this.isHide = false;
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /** 隐藏 */
   hide() {
     this.isHide = true;
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /** 切换显隐状态 */
   toggleHide() {
     this.isHide = !this.isHide;
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /** 组件初始化钩子函数 */
@@ -151,7 +149,7 @@ export class VisualComponent {
    * @param options
    */
   render(data: any, options?: Record<string, any>) {
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /**
@@ -159,7 +157,7 @@ export class VisualComponent {
    * @param newOptions
    */
   updateOptions(newOptions: Record<string, any>) {
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /**
@@ -168,7 +166,7 @@ export class VisualComponent {
    */
   updateAttr(newAttr: VisualAttr) {
     merge(this.attr, newAttr);
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /**
@@ -177,7 +175,7 @@ export class VisualComponent {
    * @param height
    */
   resize(width: number, height: number) {
-    this._cdr?.detectChanges();
+    this.detectChanges();
   }
 
   /**
@@ -204,5 +202,10 @@ export class VisualComponent {
     this.request(this.dataConfig['source'].dataSource)
       .then(res => this.requestSucceeded.emit(res))
       .catch(err => this.requestFailed.emit(err));
+  }
+
+  /** 触发变更检测 */
+  detectChanges() {
+    this.changeDetectorRef.detectChanges();
   }
 }
