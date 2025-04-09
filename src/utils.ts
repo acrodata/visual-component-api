@@ -1,4 +1,5 @@
-import { isString, isObject, merge } from 'lodash-es';
+import { GuiFields } from '@acrodata/gui';
+import { isObject, isString, merge } from 'lodash-es';
 import { VisualDataSource } from './interfaces';
 
 /**
@@ -40,4 +41,29 @@ export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDa
       dataSource.tingyunConfig = JSON.stringify(dataSource.tingyunConfig);
     }
   }
+}
+
+
+/**
+ * 从 GUI 配置中获取默认配置项
+ * @param config  GUI 配置
+ * @param options 默认配置项
+ * @returns
+ */
+export function getOptionsFromConfig(config: GuiFields, options: Record<string, any>) {
+  for (const key of Object.keys(config)) {
+    const fieldCfg = config[key];
+    if (fieldCfg.default != null) {
+      options[key] = fieldCfg.default;
+    } else {
+      if (fieldCfg.type === 'group' || fieldCfg.type === 'menu' || fieldCfg.type === 'menuItem') {
+        options[key] = getOptionsFromConfig(fieldCfg.children as GuiFields, {});
+      } else if (fieldCfg.type === 'tabs') {
+        options[key] = [];
+      } else {
+        options[key] = null;
+      }
+    }
+  }
+  return options;
 }
