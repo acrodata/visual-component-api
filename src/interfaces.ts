@@ -1,3 +1,5 @@
+import { GuiFields } from '@acrodata/gui';
+
 export interface VisualAttr {
   x: number;
   y: number;
@@ -180,4 +182,19 @@ export interface VisualDataSource {
   tingyun?: string | number;
   /** 数据源配置 */
   tingyunConfig?: string;
+}
+
+export interface VisualConfigs {
+  attr?: Partial<VisualAttr>;
+
+  config?: GuiFields;
+  options?: Record<string, any>;
+
+  apis?: VisualApis;
+  data?: Record<string, any[]>;
+
+  events?: VisualEvents;
+  actions?: VisualActions;
+
+  resources?: Record<string, any>;
 }
