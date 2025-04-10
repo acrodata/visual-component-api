@@ -1,5 +1,5 @@
 import { GuiFields } from '@acrodata/gui';
-import { isObject, isString, merge } from 'lodash-es';
+import { isArray, isObject, isString, merge, mergeWith } from 'lodash-es';
 import { VisualDataSource } from './interfaces';
 
 /**
@@ -43,7 +43,6 @@ export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDa
   }
 }
 
-
 /**
  * 从 GUI 配置中获取默认配置项
  * @param config  GUI 配置
@@ -66,4 +65,14 @@ export function getOptionsFromConfig(config: GuiFields, options: Record<string, 
     }
   }
   return options;
+}
+
+/**
+ * 合并对象，数组值直接替换
+ * @param object
+ * @param source
+ * @returns
+ */
+export function mergeObject(object: Record<string, any>, source: Record<string, any>) {
+  return mergeWith(object, source, (obj, src) => (isArray(src) ? src : undefined));
 }

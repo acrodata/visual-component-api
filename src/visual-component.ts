@@ -1,6 +1,6 @@
 import { GuiFields } from '@acrodata/gui';
 import { ChangeDetectorRef, EventEmitter, inject } from '@angular/core';
-import { defaults, isEmpty, merge } from 'lodash-es';
+import { defaults, isEmpty } from 'lodash-es';
 import {
   VisualActions,
   VisualApis,
@@ -10,7 +10,7 @@ import {
   VisualEvents,
   VisualInteractions,
 } from './interfaces';
-import { getOptionsFromConfig, mergeDataSource } from './utils';
+import { getOptionsFromConfig, mergeDataSource, mergeObject } from './utils';
 
 export class VisualComponent {
   constructor(configs?: Record<string, any>) {
@@ -157,6 +157,12 @@ export class VisualComponent {
    * @param newOptions
    */
   updateOptions(newOptions: Record<string, any>) {
+    if (!isEmpty(newOptions) && this.options != newOptions) {
+      mergeObject(this.options, newOptions);
+    }
+    if (!isEmpty(this.apis)) {
+      this.render(this.responseData.source, this.options);
+    }
     this.detectChanges();
   }
 
@@ -165,7 +171,7 @@ export class VisualComponent {
    * @param newAttr
    */
   updateAttr(newAttr: VisualAttr) {
-    merge(this.attr, newAttr);
+    mergeObject(this.attr, newAttr);
     this.detectChanges();
   }
 
@@ -197,8 +203,9 @@ export class VisualComponent {
    * @description options 组件配置项
    */
   requestData(data: { config?: any; options?: any }) {
+    // TODO: data 重新设计，object 表示传一个参数，array 表示传多个参数
     mergeDataSource(this.dataConfig?.['source']?.dataSource, data.config || {});
-    merge(this.options, data.options || {});
+    mergeObject(this.options, data.options || {});
     this.request(this.dataConfig['source'].dataSource)
       .then(res => this.requestSucceeded.emit(res))
       .catch(err => this.requestFailed.emit(err));
