@@ -1,6 +1,6 @@
 import { GuiFields } from '@acrodata/gui';
 import { ChangeDetectorRef, EventEmitter, inject } from '@angular/core';
-import { defaults, isEmpty } from 'lodash-es';
+import { defaults, isArray, isEmpty, isPlainObject } from 'lodash-es';
 import {
   VisualActions,
   VisualApis,
@@ -198,15 +198,22 @@ export class VisualComponent {
 
   /**
    * 请求数据
-   * @param data
-   * @description config  数据源配置
-   * @description options 组件配置项
+   * @param params 请求参数
    */
-  requestData(data: { config?: any; options?: any }) {
-    // TODO: data 重新设计，object 表示传一个参数，array 表示传多个参数
-    mergeDataSource(this.dataConfig?.['source']?.dataSource, data.config || {});
-    mergeObject(this.options, data.options || {});
-    this.request(this.dataConfig['source'].dataSource)
+  requestData(params: Record<string, any> | any[]) {
+    let dataSrc = {};
+    let opts = {};
+    if (isPlainObject(params)) {
+      dataSrc = params;
+    } else if (isArray(params)) {
+      dataSrc = isPlainObject(params[0]) ? params[0] : {};
+      opts = isPlainObject(params[1]) ? params[1] : {};
+    }
+
+    mergeDataSource(this.dataConfig['source']?.dataSource, dataSrc);
+    mergeObject(this.options, opts);
+
+    this.request(this.dataConfig['source']?.dataSource)
       .then(res => this.requestSucceeded.emit(res))
       .catch(err => this.requestFailed.emit(err));
   }
