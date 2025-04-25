@@ -23,7 +23,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@acrodata/gui": "^2.2.0",
+    "@acrodata/gui": "^2.4.0",
     "lodash-es": "^4.17.21",
     "tslib": "^2.3.0"
   },
