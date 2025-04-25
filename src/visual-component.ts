@@ -96,13 +96,13 @@ export class VisualComponent {
   apis: VisualApis = {};
 
   /** 静态数据 */
-  data: { [k: string]: any[] | undefined; source?: any[] } = {};
+  data: Record<string, any[]> = {};
 
   /** 数据源配置 */
   dataConfig: Record<string, VisualDataConfig> = {};
 
   /** 请求响应数据 */
-  responseData: { [k: string]: any[] | undefined; source?: any[] } = {};
+  responseData: Record<string, any[]> = {};
 
   /** 资源路径 */
   resources: Record<string, any> = {};
@@ -161,7 +161,7 @@ export class VisualComponent {
       mergeObject(this.options, newOptions);
     }
     if (!isEmpty(this.apis)) {
-      this.render(this.responseData.source, this.options);
+      this.render(this.responseData['source'], this.options);
     }
     this.detectChanges();
   }
