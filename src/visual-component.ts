@@ -114,10 +114,10 @@ export class VisualComponent {
   noData?: boolean;
 
   /** 父组件 */
-  parent?: VisualComponent;
+  parent?: VisualComponent | null;
 
   /** 子组件 */
-  children?: VisualComponent[];
+  children?: VisualComponent[] | null;
 
   /** 显示 */
   show() {
@@ -221,5 +221,10 @@ export class VisualComponent {
   /** 触发变更检测 */
   detectChanges() {
     this.changeDetectorRef.detectChanges();
+  }
+
+  /** 标记变更检测 */
+  markForCheck() {
+    this.changeDetectorRef.markForCheck();
   }
 }
