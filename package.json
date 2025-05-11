@@ -1,6 +1,6 @@
 {
   "name": "@acrodata/visual-component-api",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Visual component type definitions",
   "publishConfig": {
     "access": "public"
