@@ -12,21 +12,28 @@
     codemirror "^6.0.0"
     tslib "^2.3.0"
 
-"@acrodata/gui@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@acrodata/gui/-/gui-2.4.0.tgz#c6aa9352cf999289e5f0f772a279a9529667b329"
-  integrity sha512-oiQgXqm+Ym4P2lIjVFKmuyjAsKBDHv16CRub0LJt6ItYvqGfs/NHxKYMDh1gMqldhaHqwyNXY65WrZX65T7I0w==
+"@acrodata/gradient-picker@^0.7.0":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@acrodata/gradient-picker/-/gradient-picker-0.7.1.tgz#2dcf8825b5dce2f44ba4c81bc5f7a7b5f40393c0"
+  integrity sha512-m67RlAujN1A1pqGsecOVifk2tFqz2n2ksw2ki+fuGG564q4Cay1uyExplVRbwAzYIamvRT2YXBWPhCRhlrtkzQ==
   dependencies:
-    "@acrodata/code-editor" "^0.5.0"
-    "@acrodata/rnd-dialog" "^0.3.0"
     tslib "^2.3.0"
 
-"@acrodata/rnd-dialog@^0.3.0":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@acrodata/rnd-dialog/-/rnd-dialog-0.3.2.tgz#1a10fbf6aeae27e26d82fd96588b0ee68480d8f8"
-  integrity sha512-yiZ59rRVKUXlYa7CZGFBB2g93Dj36/qAInXdHzvDsQdMLBjpjTz073UTaTtL/3jm76IKXmoPlN1euV2BttdzCQ==
+"@acrodata/gui@^2.6.0":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@acrodata/gui/-/gui-2.6.1.tgz#6c49f34151c112479162bbb921fbd23f48512188"
+  integrity sha512-2ga29AI+KEzxaJ0vrFbTxCXNuJxbE6jpJH3UCjAmEB2T3rpdN8wEcnp0wxHjBPsxb6ugJbBLIKg2o0JJRGq15A==
   dependencies:
-    gesto "^1.19.4"
+    "@acrodata/code-editor" "^0.5.0"
+    "@acrodata/gradient-picker" "^0.7.0"
+    "@acrodata/rnd-dialog" "^0.4.0"
+    tslib "^2.3.0"
+
+"@acrodata/rnd-dialog@^0.4.0":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@acrodata/rnd-dialog/-/rnd-dialog-0.4.1.tgz#fdebf769017c91b68889c0b03b5b39e497a50616"
+  integrity sha512-ZC2UBwkKfYJhc02eGuVWrjGdUpd+IaZvp6NyymPcfsecZhfX4fjgy+Mdejy+rbDMBrxooGaO+SsXbDEWlVh33A==
+  dependencies:
     tslib "^2.3.0"
 
 "@angular/core@^18.2.0":
@@ -123,11 +130,6 @@
     style-mod "^4.1.0"
     w3c-keyname "^2.2.4"
 
-"@daybrush/utils@^1.1.1", "@daybrush/utils@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@daybrush/utils/-/utils-1.13.0.tgz#ea70a60864130da476406fdd1d465e3068aea0ff"
-  integrity sha512-ALK12C6SQNNHw1enXK+UO8bdyQ+jaWNQ1Af7Z3FNxeAwjYhQT7do+TRE4RASAJ3ObaS2+TJ7TXR3oz2Gzbw0PQ==
-
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@isaacs/cliui/-/cliui-8.0.2.tgz#b37667b7bc181c168782259bab42474fbf52b550"
@@ -168,13 +170,6 @@
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
-
-"@scena/event-emitter@^1.0.2":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@scena/event-emitter/-/event-emitter-1.0.5.tgz#047e3acef93cf238d7ce3a8cc5a12ec6bd9c3bb1"
-  integrity sha512-AzY4OTb0+7ynefmWFQ6hxDdk0CySAq/D4efljfhtRHCOP7MBF9zUfhKG3TJiroVjASqVgkRJFdenS8ArZo6Olg==
-  dependencies:
-    "@daybrush/utils" "^1.1.1"
 
 "@types/lodash-es@^4.17.6":
   version "4.17.12"
@@ -283,14 +278,6 @@ foreground-child@^3.1.0:
   dependencies:
     cross-spawn "^7.0.6"
     signal-exit "^4.0.1"
-
-gesto@^1.19.4:
-  version "1.19.4"
-  resolved "https://registry.yarnpkg.com/gesto/-/gesto-1.19.4.tgz#14921ca89e4e70c14307c4d942df04f59eb00749"
-  integrity sha512-hfr/0dWwh0Bnbb88s3QVJd1ZRJeOWcgHPPwmiH6NnafDYvhTsxg+SLYu+q/oPNh9JS3V+nlr6fNs8kvPAtcRDQ==
-  dependencies:
-    "@daybrush/utils" "^1.13.0"
-    "@scena/event-emitter" "^1.0.2"
 
 glob@^10.3.7:
   version "10.4.5"

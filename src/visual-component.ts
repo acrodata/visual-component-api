@@ -1,6 +1,6 @@
-import { GuiFields } from '@acrodata/gui';
+import { getModelFromConfig, GuiFields } from '@acrodata/gui';
 import { ChangeDetectorRef, EventEmitter, inject } from '@angular/core';
-import { defaults, isArray, isEmpty, isPlainObject } from 'lodash-es';
+import { isArray, isEmpty, isPlainObject } from 'lodash-es';
 import {
   VisualActions,
   VisualApis,
@@ -10,14 +10,14 @@ import {
   VisualEvents,
   VisualInteractions,
 } from './interfaces';
-import { getOptionsFromConfig, mergeDataSource, mergeObject } from './utils';
+import { mergeDataSource, mergeObject } from './utils';
 
 export class VisualComponent {
   constructor(configs?: Record<string, any>) {
     if (configs) {
       this.attr = { ...configs['attr'] };
       this.config = { ...configs['config'] };
-      this.options = defaults(configs['options'], getOptionsFromConfig(this.config, {}));
+      this.options = getModelFromConfig(this.config, configs['options']);
       this.apis = { ...configs['apis'] };
       this.data = { ...configs['data'] };
       this.resources = { ...configs['resources'] };
