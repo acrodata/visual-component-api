@@ -49,7 +49,7 @@ export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDa
  * @param options 默认配置项
  * @returns
  */
-export function getOptionsFromConfig(config: GuiFields, options: Record<string, any>) {
+export function getOptionsFromConfig(config: GuiFields, options: Record<string, any> = {}) {
   for (const [key, fieldCfg] of Object.entries(config)) {
     if (options[key] != null) {
       continue;

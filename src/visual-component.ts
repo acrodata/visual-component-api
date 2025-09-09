@@ -17,7 +17,7 @@ export class VisualComponent {
     if (configs) {
       this.attr = { ...configs['attr'] };
       this.config = { ...configs['config'] };
-      this.options = getOptionsFromConfig(this.config, configs['options']);
+      this.options = getOptionsFromConfig(this.config, configs['options'] || {});
       this.apis = { ...configs['apis'] };
       this.data = { ...configs['data'] };
       this.resources = { ...configs['resources'] };
