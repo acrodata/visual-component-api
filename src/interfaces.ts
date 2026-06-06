@@ -38,12 +38,12 @@ export interface VisualInteraction {
   component: { id: string; name: string };
   /** 交互动作 */
   action: string;
-  /** 数据过滤器 */
-  filters: VisualDataFilter[];
-  /** 条件配置 */
-  conditions?: VisualDataFilter[];
+  /** 动作参数 */
+  filters: VisualDataSourceFilter[];
   /** 条件类型：全部满足或者只满足一个 */
   conditionType?: 'all' | 'either' | null;
+  /** 条件配置 */
+  conditions?: VisualDataSourceFilter[];
 }
 
 export interface VisualInteractions {
