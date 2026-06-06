@@ -122,11 +122,19 @@ export type VisualDatabaseType =
 
 export type VisualDataSourceOtherType = 'prometheus' | 'apacheDruid' | 'tingyun';
 
+export interface VisualDataSourceApi {
+  url: string;
+  method: 'get' | 'post' | 'put' | 'delete';
+  headers?: any;
+  body?: any;
+  params?: any;
+  proxy?: boolean;
+  cookie?: boolean;
+}
+
 export interface VisualDataFilter {
   /** 全局过滤器的 id */
-  id?: number;
-  /** 是否启用 */
-  enable?: boolean;
+  id: string;
   /** 数据处理函数的名称 */
   name: string;
   /** 数据处理函数主体，只有 return 部分 */
@@ -135,12 +143,17 @@ export interface VisualDataFilter {
   code?: string;
 }
 
+export interface VisualDataSourceFilter extends Pick<VisualDataFilter, 'id'> {
+  /** 是否启用 */
+  enable?: boolean;
+}
+
 export interface VisualDataSource {
   type?: VisualDataSourceType;
   /** 是否使用过滤器 */
   useFilter?: boolean;
   /** 过滤器数组 */
-  filters?: VisualDataFilter[];
+  filters?: VisualDataSourceFilter[];
   /** Mock 数据模板 */
   mockTemplate?: string;
   /** 时间戳 */
@@ -148,21 +161,14 @@ export interface VisualDataSource {
   /** 静态数据源 */
   staticData?: string;
   /** API 数据源配置 */
-  api?: {
-    url: string;
-    method: 'get' | 'post' | 'put' | 'delete';
-    headers?: any;
-    body?: any;
-    params?: any;
-    proxy?: boolean;
-    cookie?: boolean;
-  };
+  api?: VisualDataSourceApi;
   /** 数据源 ID */
   csv?: string | number;
   /** 数据库的数据源 ID */
   database?: string | number;
   /** 数据库查询 sql */
   sql?: string;
+
   /** 数据源 ID */
   prometheus?: string | number;
   /** 数据源配置 */
