@@ -8,7 +8,7 @@ import {
   VisualDataConfig,
   VisualDataSource,
   VisualEvents,
-  VisualInteractions,
+  VisualInteraction,
 } from './interfaces';
 import { getOptionsFromConfig, mergeDataSource, mergeObject } from './utils';
 
@@ -90,7 +90,7 @@ export class VisualComponent {
   };
 
   /** 交互配置 */
-  interactions: VisualInteractions = {};
+  interactions: VisualInteraction[] = [];
 
   /** API 字段配置 */
   apis: VisualApis = {};

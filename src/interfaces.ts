@@ -31,23 +31,31 @@ export interface VisualActions {
   [k: string]: VisualAction;
 }
 
+export interface VisualInteractionCondition {
+  /** 条件类型：全部满足或者只满足一个 */
+  type: 'AND' | 'OR' | null;
+  /** 条件配置 */
+  filters: VisualDataSourceFilter[];
+}
+
+export interface VisualInteractionAction {
+  /** 交互组件 */
+  component: { id: string; name: string };
+  /** 条件配置 */
+  condition: VisualInteractionCondition;
+  /** 动作函数 */
+  handler: string;
+  /** 动作函数的参数 */
+  filters: VisualDataSourceFilter[];
+}
+
 export interface VisualInteraction {
   /** 交互事件 */
   event: string;
-  /** 交互组件 */
-  component: { id: string; name: string };
-  /** 交互动作 */
-  action: string;
-  /** 动作参数 */
-  filters: VisualDataSourceFilter[];
-  /** 条件类型：全部满足或者只满足一个 */
-  conditionType?: 'all' | 'either' | null;
   /** 条件配置 */
-  conditions?: VisualDataSourceFilter[];
-}
-
-export interface VisualInteractions {
-  [k: string]: VisualInteraction[];
+  condition: VisualInteractionCondition;
+  /** 交互动作 */
+  actions: VisualInteractionAction[];
 }
 
 export interface VisualApiField {
