@@ -13,14 +13,17 @@ export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDa
       if (isString(dataSource.api?.headers)) {
         dataSource.api.headers = JSON.parse(dataSource.api.headers);
       }
-      if (isString(dataSource.api?.body)) {
-        dataSource.api.body = JSON.parse(dataSource.api.body);
-      }
       if (isString(dataSource.api?.params)) {
         dataSource.api.params = JSON.parse(dataSource.api.params);
       }
-      if (isString(dataSource.tingyunConfig)) {
-        dataSource.tingyunConfig = JSON.parse(dataSource.tingyunConfig || '{}');
+      if (
+        isString(dataSource.api?.body) &&
+        (dataSource.api.bodyType === 'json' || dataSource.api.bodyType === 'formData')
+      ) {
+        dataSource.api.body = JSON.parse(dataSource.api.body);
+      }
+      if (isString(dataSource.dataConfig)) {
+        dataSource.dataConfig = JSON.parse(dataSource.dataConfig || '{}');
       }
     } catch (error) {
       console.error(error);
@@ -31,14 +34,14 @@ export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDa
     if (isObject(dataSource.api?.headers)) {
       dataSource.api.headers = JSON.stringify(dataSource.api.headers);
     }
-    if (isObject(dataSource.api?.body)) {
-      dataSource.api.body = JSON.stringify(dataSource.api.body);
-    }
     if (isObject(dataSource.api?.params)) {
       dataSource.api.params = JSON.stringify(dataSource.api.params);
     }
-    if (isObject(dataSource.tingyunConfig)) {
-      dataSource.tingyunConfig = JSON.stringify(dataSource.tingyunConfig);
+    if (isObject(dataSource.api?.body)) {
+      dataSource.api.body = JSON.stringify(dataSource.api.body);
+    }
+    if (isObject(dataSource.dataConfig)) {
+      dataSource.dataConfig = JSON.stringify(dataSource.dataConfig);
     }
   }
 }

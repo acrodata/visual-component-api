@@ -122,19 +122,19 @@ export class VisualComponent {
   /** 显示 */
   show() {
     this.isHide = false;
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /** 隐藏 */
   hide() {
     this.isHide = true;
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /** 切换显隐状态 */
   toggleHide() {
     this.isHide = !this.isHide;
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /** 组件初始化钩子函数 */
@@ -149,7 +149,7 @@ export class VisualComponent {
    * @param options
    */
   render(data: any, options?: Record<string, any>) {
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /**
@@ -163,7 +163,7 @@ export class VisualComponent {
     if (!isEmpty(this.apis)) {
       this.render(this.responseData['source'], this.options);
     }
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /**
@@ -172,7 +172,7 @@ export class VisualComponent {
    */
   updateAttr(newAttr: VisualAttr) {
     mergeObject(this.attr, newAttr);
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /**
@@ -181,7 +181,7 @@ export class VisualComponent {
    * @param height
    */
   resize(width: number, height: number) {
-    this.detectChanges();
+    this.markForCheck();
   }
 
   /**
@@ -218,13 +218,13 @@ export class VisualComponent {
       .catch(err => this.requestFailed.emit(err));
   }
 
-  /** 触发变更检测 */
-  detectChanges() {
-    this.changeDetectorRef.detectChanges();
-  }
-
   /** 标记变更检测 */
   markForCheck() {
     this.changeDetectorRef.markForCheck();
+  }
+
+  /** 触发变更检测 */
+  detectChanges() {
+    this.changeDetectorRef.detectChanges();
   }
 }

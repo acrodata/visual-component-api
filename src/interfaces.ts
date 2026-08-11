@@ -121,19 +121,23 @@ export type VisualDataSourceType =
 
 export type VisualDatabaseType =
   | 'mysql'
+  | 'mariadb'
+  | 'postgres'
   | 'oracle'
-  | 'db2'
   | 'sqlserver'
-  | 'postgresql'
+  | 'db2'
   | 'dm'
+  | 'mongodb'
+  | 'redis'
   | 'clickhouse';
 
-export type VisualDataSourceOtherType = 'prometheus' | 'apacheDruid' | 'tingyun';
+export type VisualDataSourceOtherType = 'prometheus';
 
 export interface VisualDataSourceApi {
   url: string;
   method: 'get' | 'post' | 'put' | 'delete';
   headers?: any;
+  bodyType?: 'text' | 'json' | 'formData' | 'formUrlEncoded' | 'binary';
   body?: any;
   params?: any;
   proxy?: boolean;
@@ -170,32 +174,16 @@ export interface VisualDataSource {
   staticData?: string;
   /** API 数据源配置 */
   api?: VisualDataSourceApi;
-  /** 数据源 ID */
+  /** CSV 的数据源 ID */
   csv?: string | number;
   /** 数据库的数据源 ID */
   database?: string | number;
   /** 数据库查询 sql */
   sql?: string;
-
-  /** 数据源 ID */
-  prometheus?: string | number;
-  /** 数据源配置 */
-  prometheusConfig?: {
-    method: string;
-    path: string;
-    query: string;
-    step: number;
-  };
-  /** 数据源 ID */
-  apacheDruid?: string | number;
-  /** 数据源配置 */
-  apacheDruidConfig?: {
-    query: string;
-  };
-  /** 数据源 ID */
-  tingyun?: string | number;
-  /** 数据源配置 */
-  tingyunConfig?: string;
+  /** 通用数据源 ID */
+  dataSourceId?: string | number;
+  /** 通用数据源配置 */
+  dataConfig?: any;
 }
 
 export interface VisualConfigs {
