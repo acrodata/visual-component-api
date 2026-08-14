@@ -18,7 +18,9 @@ export function mergeDataSource(dataSource?: VisualDataSource, config?: VisualDa
       }
       if (
         isString(dataSource.api?.body) &&
-        (dataSource.api.bodyType === 'json' || dataSource.api.bodyType === 'formData')
+        (dataSource.api.bodyType === 'json' ||
+          dataSource.api.bodyType === 'formData' ||
+          dataSource.api.bodyType === 'formUrlEncoded')
       ) {
         dataSource.api.body = JSON.parse(dataSource.api.body);
       }

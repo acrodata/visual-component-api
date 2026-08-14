@@ -135,9 +135,9 @@ export type VisualDataSourceOtherType = 'prometheus';
 
 export interface VisualDataSourceApi {
   url: string;
-  method: 'get' | 'post' | 'put' | 'delete';
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS';
   headers?: any;
-  bodyType?: 'text' | 'json' | 'formData' | 'formUrlEncoded' | 'binary';
+  bodyType?: 'json' | 'xml' | 'text' | 'formData' | 'formUrlEncoded' | 'binary' | null;
   body?: any;
   params?: any;
   proxy?: boolean;
