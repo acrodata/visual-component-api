@@ -50,7 +50,7 @@ export class VisualComponent {
     }
   }
 
-  changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
   /** 组件 ID */
   id = '';
@@ -118,6 +118,9 @@ export class VisualComponent {
 
   /** 子组件 */
   children?: VisualComponent[] | null;
+
+  /** 翻译字典，平台切换语言会更新这个对象 */
+  translations: Record<string, string> = {};
 
   /** 显示 */
   show() {
@@ -220,11 +223,11 @@ export class VisualComponent {
 
   /** 标记变更检测 */
   markForCheck() {
-    this.changeDetectorRef.markForCheck();
+    this._changeDetectorRef.markForCheck();
   }
 
   /** 触发变更检测 */
   detectChanges() {
-    this.changeDetectorRef.detectChanges();
+    this._changeDetectorRef.detectChanges();
   }
 }
